@@ -1,0 +1,18 @@
+body {
+    background-color: #effabf;
+    color: #7ab08e;
+    font-family: 'Roboto', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: 800;
+    padding: 50px 0;
+}
+
+@media (max-width: 600px) {
+    
+}
