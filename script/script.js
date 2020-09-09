@@ -32,12 +32,14 @@ for(index = 0; index < (numeroCartas/2); index++) {
 }
 
 function verificaImagem() {
-    alert(imagemAleatoria);
-    for(cont = 0; cont < (numeroCartas/2); cont++) {
+
+    for(cont = 0; cont <= (numeroCartas/2); cont++) {
+
         if(imagemAleatoria === imagensEscolhidas[cont]) {
-            valorAleatorio = Math.floor(Math.random() * listaImagens.length);
-            imagemAleatoria = listaImagens[valorAleatorio];
+            var indexAleatorio = Math.floor(Math.random() * listaImagens.length);
+            imagemAleatoria = listaImagens[indexAleatorio];
             cont = 0;
+            cont--;
         }
     }
     
@@ -67,5 +69,4 @@ function dispoeCartas() {
         posicao[indexAletorio] = variavelTemporaria;
     }
 }
-alert(imagensEscolhidas);
-alert(posicao);
+
