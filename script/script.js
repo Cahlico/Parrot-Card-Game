@@ -5,6 +5,10 @@ var cont;
 var listaImagens;
 var imagensEscolhidas = [];
 var posicao = [];
+var rodadas = 0;
+var elementoAnterior;
+var cartaVirada;
+var cartaAnterior;
 
 // revisa se o numero escolhido esta de acordo com as condicoes
 while ((numeroCartas > 14) || (numeroCartas < 4) || (numeroCartas % 2 !== 0)) {
@@ -77,8 +81,31 @@ function adicionaCartas() {
     }
 }
 
+//pega o li selecionado e gira para a imagem aleatoria
 function giraCarta(elemento) {
     
     elemento.querySelector("img:first-child").style.transform = "rotateY(-180deg)";
     elemento.querySelector("img:last-child").style.transform = "rotateY(0deg)";
+    
+    rodadas++;
+
+    if (rodadas % 2 === 0) {
+
+        setTimeout(verificaPares, 1000, elemento, elementoAnterior);
+    }
+    elementoAnterior = elemento;
+}
+
+
+function verificaPares(elemento, elementoAnterior) {
+
+    cartaVirada = elemento.querySelector("img:last-child").src;
+    cartaAnterior = elementoAnterior.querySelector("img:last-child").src;
+    
+    if (cartaVirada !== cartaAnterior) {
+        elemento.querySelector("img:first-child").style.transform = "rotateY(0deg)";
+        elemento.querySelector("img:last-child").style.transform = "rotateY(180deg)";
+        elementoAnterior.querySelector("img:first-child").style.transform = "rotateY(0deg)";
+        elementoAnterior.querySelector("img:last-child").style.transform = "rotateY(180deg)";
+    }
 }
