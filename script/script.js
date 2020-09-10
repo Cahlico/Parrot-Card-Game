@@ -9,6 +9,7 @@ var rodadas = 0;
 var elementoAnterior;
 var cartaVirada;
 var cartaAnterior;
+var paresAcertados = 0;
 
 // revisa se o numero escolhido esta de acordo com as condicoes
 while ((numeroCartas > 14) || (numeroCartas < 4) || (numeroCartas % 2 !== 0)) {
@@ -96,7 +97,7 @@ function giraCarta(elemento) {
     elementoAnterior = elemento;
 }
 
-
+//compara os pares de cartas, se forem diferentes elas viram para baixo novamente
 function verificaPares(elemento, elementoAnterior) {
 
     cartaVirada = elemento.querySelector("img:last-child").src;
@@ -107,5 +108,14 @@ function verificaPares(elemento, elementoAnterior) {
         elemento.querySelector("img:last-child").style.transform = "rotateY(180deg)";
         elementoAnterior.querySelector("img:first-child").style.transform = "rotateY(0deg)";
         elementoAnterior.querySelector("img:last-child").style.transform = "rotateY(180deg)";
+    }
+
+    else {
+        
+        paresAcertados++;
+        
+        if(paresAcertados === numeroCartas/2) {
+            alert("Você venceu em " + rodadas + " rodadas!");
+        }
     }
 }
