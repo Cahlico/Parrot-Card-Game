@@ -12,16 +12,7 @@ while ((numeroCartas > 14) || (numeroCartas < 4) || (numeroCartas % 2 !== 0)) {
 }
 
 //array dos gifs a serem utilizados
-listaImagens = ["<img src='imagens/bobrossparrot.gif'>", "<img src='imagens/explodyparrot.gif'>", "<img src='imagens/fiestaparrot.gif'>", "<img src='imagens/metalparrot.gif'>", "<img src='imagens/revertitparrot.gif'>", "<img src='imagens/tripletsparrot.gif'>", "<img src='imagens/unicornparrot.gif'>"];
-
-//disposicao de cartas com base na escolha do usuario
-for(index = 0; index < numeroCartas; index++) {
-    var imagem = "<img src='imagens/front.png'>";
-    var cartas = document.querySelector(".frente");
-    var novoLi = document.createElement("li");
-    novoLi.innerHTML = imagem;
-    cartas.appendChild(novoLi);
-}
+listaImagens = ["<img src='imagens/bobrossparrot.gif' class='verso'>", "<img src='imagens/explodyparrot.gif' class='verso'>", "<img src='imagens/fiestaparrot.gif' class='verso'>", "<img src='imagens/metalparrot.gif' class='verso'>", "<img src='imagens/revertitparrot.gif' class='verso'>", "<img src='imagens/tripletsparrot.gif' class='verso'>", "<img src='imagens/unicornparrot.gif' class='verso'>"];
 
 //escolhe os gifs aleatoriamente para serem usados
 for(index = 0; index < (numeroCartas/2); index++) {
@@ -67,6 +58,27 @@ function dispoeCartas() {
         variavelTemporaria = posicao[index];
         posicao[index] = posicao[indexAletorio];
         posicao[indexAletorio] = variavelTemporaria;
+    } 
+
+    adicionaCartas(); //adiciona as cartas junto ao seus versos
+}
+
+//disposicao de cartas com base na escolha do usuario
+function adicionaCartas() {
+    
+    for(index = 0; index < numeroCartas; index++) {
+        var imagemVerso = posicao[index];
+        var imagemFrente = "<img src='imagens/front.png'>";
+        var lista = document.querySelector("ul");
+        novoLi = document.createElement("li");
+        novoLi.setAttribute("onclick", "giraCarta(this)")
+        novoLi.innerHTML = imagemFrente + imagemVerso;
+        lista.appendChild(novoLi);
     }
 }
 
+function giraCarta(elemento) {
+    
+    elemento.querySelector("img:first-child").style.transform = "rotateY(-180deg)";
+    elemento.querySelector("img:last-child").style.transform = "rotateY(0deg)";
+}
