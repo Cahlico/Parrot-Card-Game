@@ -16,6 +16,19 @@ h1 {
     padding: 50px 0;
 }
 
+.caixa-contador {
+    background-color: #7ab08e;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 20px 20px 100px;
+    text-align: center;
+}
+  
+.contador {
+    color: #effabf;
+    font-size: 4em;
+}
+
 main ul{
     display: flex;
     flex-wrap: wrap;

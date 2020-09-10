@@ -10,11 +10,15 @@ var elementoAnterior;
 var cartaVirada;
 var cartaAnterior;
 var paresAcertados = 0;
+var contador;
+var intervalo;
+var segundos = 0;
 
 //array dos gifs a serem utilizados
 listaImagens = ["<img src='imagens/bobrossparrot.gif' class='verso'>", "<img src='imagens/explodyparrot.gif' class='verso'>", "<img src='imagens/fiestaparrot.gif' class='verso'>", "<img src='imagens/metalparrot.gif' class='verso'>", "<img src='imagens/revertitparrot.gif' class='verso'>", "<img src='imagens/tripletsparrot.gif' class='verso'>", "<img src='imagens/unicornparrot.gif' class='verso'>"];
 
 escolherNumeroCartas();
+relogio();
 
 // revisa se o numero escolhido esta de acordo com as condicoes
 function escolherNumeroCartas() {
@@ -131,6 +135,7 @@ function verificaPares(elemento, elementoAnterior) {
             alert("Você venceu em " + rodadas + " rodadas!");
             var irNovamente = prompt("Jogar denovo? (s/n)");
             
+            //resetando as variaveis globais
             if(irNovamente.toUpperCase() === "S" || irNovamente.toUpperCase() === "SIM") {
                 rodadas = 0;
                 paresAcertados = 0;
@@ -142,16 +147,37 @@ function verificaPares(elemento, elementoAnterior) {
                 posicao = [];
                 rodadas = 0;
                 paresAcertados = 0;
+                segundos = 0;
                 removeCartas();
             }
         }
     }
 }
 
+//removendo ul atual e adicionando um ul vazio
 function removeCartas() {
     document.querySelector("ul").remove();
     var main = document.querySelector("main");
     novoUl = document.createElement("ul");
     main.appendChild(novoUl);
     escolherNumeroCartas();
+}
+
+//altera o valor do contador
+function relogio() {
+    contador = document.querySelector(".contador");
+    contador.innerText = segundos;
+
+    intervalo = setInterval(contaSegundos, 1000);
+}
+
+//soma 1 aos segundos a cada 1000ms
+function contaSegundos() {
+    
+    segundos++;
+    contador.innerText = segundos;
+
+    if(paresAcertados === numeroCartas/2) {
+        clearInterval(intervalo);
+    }
 }
