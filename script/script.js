@@ -15,7 +15,13 @@ var intervalo;
 var segundos = 0;
 
 //array dos gifs a serem utilizados
-listaImagens = ["<img src='imagens/bobrossparrot.gif' class='verso'>", "<img src='imagens/explodyparrot.gif' class='verso'>", "<img src='imagens/fiestaparrot.gif' class='verso'>", "<img src='imagens/metalparrot.gif' class='verso'>", "<img src='imagens/revertitparrot.gif' class='verso'>", "<img src='imagens/tripletsparrot.gif' class='verso'>", "<img src='imagens/unicornparrot.gif' class='verso'>"];
+listaImagens = ["<img src='imagens/bobrossparrot.gif' class='verso'>", 
+"<img src='imagens/explodyparrot.gif' class='verso'>", 
+"<img src='imagens/fiestaparrot.gif' class='verso'>", 
+"<img src='imagens/metalparrot.gif' class='verso'>", 
+"<img src='imagens/revertitparrot.gif' class='verso'>", 
+"<img src='imagens/tripletsparrot.gif' class='verso'>",
+"<img src='imagens/unicornparrot.gif' class='verso'>"];
 
 escolherNumeroCartas();
 relogio();
@@ -23,12 +29,12 @@ relogio();
 // revisa se o numero escolhido esta de acordo com as condicoes
 function escolherNumeroCartas() {
     numeroCartas = prompt("Quantas cartas você deseja?\n(escolha um número par entre 4 e 14)");
-    numeroCartas = parseInt(numeroCartas);
 
     while ((numeroCartas > 14) || (numeroCartas < 4) || (numeroCartas % 2 !== 0)) {
         numeroCartas = prompt("Quantas cartas você deseja?\n(escolha um número par entre 4 e 14)");
     }
 
+    numeroCartas = parseInt(numeroCartas);
     escolherCartas();
 }
 
@@ -102,6 +108,10 @@ function adicionaCartas() {
 //pega o li selecionado e gira para a imagem aleatoria
 function giraCarta(elemento) {
     
+    if(elemento === elementoAnterior) {
+      return 0;
+    }
+
     elemento.querySelector("img:first-child").style.transform = "rotateY(-180deg)";
     elemento.querySelector("img:last-child").style.transform = "rotateY(0deg)";
     
@@ -126,10 +136,10 @@ function verificaPares(elemento, elementoAnterior) {
         elementoAnterior.querySelector("img:first-child").style.transform = "rotateY(0deg)";
         elementoAnterior.querySelector("img:last-child").style.transform = "rotateY(180deg)";
     }
-
     else {
-        
         paresAcertados++;
+        elemento.removeAttribute("onclick");
+        elementoAnterior.removeAttribute("onclick");
         
         if(paresAcertados === numeroCartas/2) {
             alert("Você venceu em " + rodadas + " rodadas!");
@@ -137,21 +147,26 @@ function verificaPares(elemento, elementoAnterior) {
             
             //resetando as variaveis globais
             if(irNovamente.toUpperCase() === "S" || irNovamente.toUpperCase() === "SIM") {
-                rodadas = 0;
-                paresAcertados = 0;
-                numeroCartas = 0;
-                imagemAleatoria = "";
-                index = 0;
-                cont = 0;
-                imagensEscolhidas = [];
-                posicao = [];
-                rodadas = 0;
-                paresAcertados = 0;
-                segundos = 0;
+                resetaVariaveis();
                 removeCartas();
+                escolherNumeroCartas();
             }
         }
     }
+}
+
+function resetaVariaveis() {
+  rodadas = 0;
+  paresAcertados = 0;
+  numeroCartas = 0;
+  imagemAleatoria = "";
+  index = 0;
+  cont = 0;
+  imagensEscolhidas = [];
+  posicao = [];
+  rodadas = 0;
+  paresAcertados = 0;
+  segundos = 0;
 }
 
 //removendo ul atual e adicionando um ul vazio
@@ -160,7 +175,6 @@ function removeCartas() {
     var main = document.querySelector("main");
     novoUl = document.createElement("ul");
     main.appendChild(novoUl);
-    escolherNumeroCartas();
 }
 
 //altera o valor do contador
