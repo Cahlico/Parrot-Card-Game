@@ -1,0 +1,31 @@
+main ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 50px
+}
+
+li {
+    backface-visibility: hidden;
+    position: relative;
+    margin: 0 80px 220px 80px;
+}
+
+main img {
+    height: 120px;
+    width: 120px;
+    padding: 30px 0;
+    background-color: #A7E9AF;
+    border-radius: 15px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    flex-shrink: 0;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+    position: absolute;
+    left: -80px;
+}
+
+.verso {
+    transform: rotateY(180deg);
+}

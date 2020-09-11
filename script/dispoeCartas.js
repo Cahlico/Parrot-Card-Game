@@ -5,14 +5,6 @@ var cont;
 var listaImagens;
 var imagensEscolhidas = [];
 var posicao = [];
-var rodadas = 0;
-var elementoAnterior;
-var cartaVirada;
-var cartaAnterior;
-var paresAcertados = 0;
-var contador;
-var intervalo;
-var segundos = 0;
 
 //array dos gifs a serem utilizados
 listaImagens = ["<img src='imagens/bobrossparrot.gif' class='verso'>", 
@@ -24,7 +16,6 @@ listaImagens = ["<img src='imagens/bobrossparrot.gif' class='verso'>",
 "<img src='imagens/unicornparrot.gif' class='verso'>"];
 
 escolherNumeroCartas();
-relogio();
 
 // revisa se o numero escolhido esta de acordo com as condicoes
 function escolherNumeroCartas() {
@@ -102,96 +93,5 @@ function adicionaCartas() {
         novoLi.setAttribute("onclick", "giraCarta(this)")
         novoLi.innerHTML = imagemFrente + imagemVerso;
         lista.appendChild(novoLi);
-    }
-}
-
-//pega o li selecionado e gira para a imagem aleatoria
-function giraCarta(elemento) {
-    
-    if(elemento === elementoAnterior) {
-      return 0;
-    }
-
-    elemento.querySelector("img:first-child").style.transform = "rotateY(-180deg)";
-    elemento.querySelector("img:last-child").style.transform = "rotateY(0deg)";
-    
-    rodadas++;
-
-    if (rodadas % 2 === 0) {
-
-        setTimeout(verificaPares, 1000, elemento, elementoAnterior);
-    }
-    elementoAnterior = elemento;
-}
-
-//compara os pares de cartas, se forem diferentes elas viram para baixo novamente
-function verificaPares(elemento, elementoAnterior) {
-
-    cartaVirada = elemento.querySelector("img:last-child").src;
-    cartaAnterior = elementoAnterior.querySelector("img:last-child").src;
-    
-    if (cartaVirada !== cartaAnterior) {
-        elemento.querySelector("img:first-child").style.transform = "rotateY(0deg)";
-        elemento.querySelector("img:last-child").style.transform = "rotateY(180deg)";
-        elementoAnterior.querySelector("img:first-child").style.transform = "rotateY(0deg)";
-        elementoAnterior.querySelector("img:last-child").style.transform = "rotateY(180deg)";
-    }
-    else {
-        paresAcertados++;
-        elemento.removeAttribute("onclick");
-        elementoAnterior.removeAttribute("onclick");
-        
-        if(paresAcertados === numeroCartas/2) {
-            alert("Você venceu em " + rodadas + " rodadas!");
-            var irNovamente = prompt("Jogar denovo? (s/n)");
-            
-            //resetando as variaveis globais
-            if(irNovamente.toUpperCase() === "S" || irNovamente.toUpperCase() === "SIM") {
-                resetaVariaveis();
-                removeCartas();
-                escolherNumeroCartas();
-            }
-        }
-    }
-}
-
-function resetaVariaveis() {
-  rodadas = 0;
-  paresAcertados = 0;
-  numeroCartas = 0;
-  imagemAleatoria = "";
-  index = 0;
-  cont = 0;
-  imagensEscolhidas = [];
-  posicao = [];
-  rodadas = 0;
-  paresAcertados = 0;
-  segundos = 0;
-}
-
-//removendo ul atual e adicionando um ul vazio
-function removeCartas() {
-    document.querySelector("ul").remove();
-    var main = document.querySelector("main");
-    novoUl = document.createElement("ul");
-    main.appendChild(novoUl);
-}
-
-//altera o valor do contador
-function relogio() {
-    contador = document.querySelector(".contador");
-    contador.innerText = segundos;
-
-    intervalo = setInterval(contaSegundos, 1000);
-}
-
-//soma 1 aos segundos a cada 1000ms
-function contaSegundos() {
-    
-    segundos++;
-    contador.innerText = segundos;
-
-    if(paresAcertados === numeroCartas/2) {
-        clearInterval(intervalo);
     }
 }
