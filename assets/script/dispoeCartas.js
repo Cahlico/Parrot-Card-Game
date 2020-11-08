@@ -7,13 +7,13 @@ var imagensEscolhidas = [];
 var posicao = [];
 
 //array dos gifs a serem utilizados
-listaImagens = ["<img src='imagens/bobrossparrot.gif' class='verso'>", 
-"<img src='imagens/explodyparrot.gif' class='verso'>", 
-"<img src='imagens/fiestaparrot.gif' class='verso'>", 
-"<img src='imagens/metalparrot.gif' class='verso'>", 
-"<img src='imagens/revertitparrot.gif' class='verso'>", 
-"<img src='imagens/tripletsparrot.gif' class='verso'>",
-"<img src='imagens/unicornparrot.gif' class='verso'>"];
+listaImagens = ["<img src='assets/imagens/bobrossparrot.gif' class='verso'>", 
+"<img src='assets/imagens/explodyparrot.gif' class='verso'>", 
+"<img src='assets/imagens/fiestaparrot.gif' class='verso'>", 
+"<img src='assets/imagens/metalparrot.gif' class='verso'>", 
+"<img src='assets/imagens/revertitparrot.gif' class='verso'>", 
+"<img src='assets/imagens/tripletsparrot.gif' class='verso'>",
+"<img src='assets/imagens/unicornparrot.gif' class='verso'>"];
 
 escolherNumeroCartas();
 
@@ -87,7 +87,7 @@ function adicionaCartas() {
     
     for(index = 0; index < numeroCartas; index++) {
         var imagemVerso = posicao[index];
-        var imagemFrente = "<img src='imagens/front.png'>";
+        var imagemFrente = "<img src='assets/imagens/front.png'>";
         var lista = document.querySelector("ul");
         novoLi = document.createElement("li");
         novoLi.setAttribute("onclick", "giraCarta(this)")
