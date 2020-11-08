@@ -1,7 +1,7 @@
 # Parrot Card Game
 
 <p align="center">
-  <img src='./assets/images/front.png' width="175" alt="parrot-card" />
+  <img src='assets/imagens/front.png' width="175" alt="parrot-card" />
 </p>
 
 ## Objective
